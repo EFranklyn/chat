@@ -8,6 +8,7 @@ export default function Ballon(props){
    const classeUserp ='message'+ ' '  + props.user+ 'message'  
    const classeUserBaloon ='baloon'+' '  + props.user + 'baloon'
    return(
+    <div className={`${props.user}boxdiv`}> 
     <div className={classeUserBaloon}>
      <div >
        <p className={classeUserp}> 
@@ -15,6 +16,7 @@ export default function Ballon(props){
             {classeUserp}
        </p>
       </div>
+    </div>
     </div>
   );
   }

@@ -1,5 +1,10 @@
-.boxdiv{
-    
+.userboxdiv{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.machineboxdiv{
+    display: flex;
+    flex-direction: row;
 }
 .baloon{
     
@@ -12,18 +17,17 @@
     height: auto;
     color: #fff;
     padding: 20px;
-    position: relative;
+    /* position: relative; */
     margin-top: 30px;
    
     align-items: end;
 }
 
 .userbaloon{
-    margin: right; 
-    /* margin-left: 15%; */
-    /* right: 25px; */
-    right: -16%;
+    display: flex;
+    flex-direction: row-reverse;
     background: firebrick;
+    margin-right: 2% ;
 
 }
 .machinebaloon{

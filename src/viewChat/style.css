@@ -3,6 +3,9 @@
     background-color: aquamarine;
     margin-left: 2%;
     margin-right: 2%;
+    height: 500px;
+    display: block;
+    overflow: scroll;
     /* display: flex;
     flex-direction: column; */
 
