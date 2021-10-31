@@ -4,12 +4,7 @@ import './style.css';
 export default function Input(props){
 
 
-  const keydown = e =>{
-    if (e.keyCode === 13){
-      
-      alert('teste')
-      }
-    }
+ 
 
     return(
     <div >     
@@ -19,8 +14,7 @@ export default function Input(props){
               // onChange={props.handleChange}
               onBlur={props.handleBlur}
               values={props.values}
-              onKeyDown={(e)=>keydown(e)}
-              defaultValue='teste'
+              defaultValue={props.value}
             />
             {props.step}
     </div>

@@ -13,7 +13,7 @@ export default function Ballon(props){
      <div >
        <p className={classeUserp}> 
             {props.message}
-            {classeUserp}
+    
        </p>
       </div>
     </div>

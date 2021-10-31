@@ -19,7 +19,7 @@ const configInput =[{
 {
   placeholder:'Cidade',
   name:'city',
-  type:'city'
+  type:''
 },
 {
   placeholder:'Data de Nascimento',
@@ -44,18 +44,79 @@ const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para come�
                   user:'machine'
 },
 
+
 ]
+
+// let machinemessages = [
+ 
+//   `Que satirfação ${values.name}. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
+//   `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
+//   `agora me fala teu email, por favor`,
+//   `você finalizou o teste faça uma avaliação`
+//   ]  
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
+const[value,setValue] = React.useState('') 
+const[name,setName] = React.useState('') 
+const[machinemessages,setMachinemessages] = React.useState([`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
+  `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
+  `agora me fala teu email, por favor`,
+  `você finalizou o teste faça uma avaliação`
+  ]  ) 
 // const[messages,setMessage] = React.useState([])
+const keydown = e =>{
+  if (e.keyCode === 13){
+    
+    nextSteps()
+  }  
 
-const machinemessages = [
+}
+const change = e =>{
+  setValue(e.target.value)
+
+}  
+const click = async e  =>{    
+  nextSteps()
+
+}
+
+const nextSteps = () =>{ 
+if(value ===''){
+  return
+}
  
-"Que satirfação fulano. Agora que sei o seu nome qual a cidade e estado que você mora ?",
-"Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?",
-"agora me fala teu email, por favor.",
-"você finalizou o teste faça uma avaliação"
-]  
+if(step===0){
+  values.name = value  
+}
+if(step===1){
+  values.city = value  
+}
+if(step===2){
+  values.dtnasc = value  
+}
+if(step===3){
+  values.email = value  
+}
+if(step===3){
+  values.score = value  
+}
+
+
+setStep(step + 1) 
+
+  
+  values.name = value
+  messages.push({message:value,user:'user'}) 
+  messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
+  setValue('')
+  
+
+  
+}
+
+
+
+
 // React.useEffect(() => {
 //   messages.push({message:machinemessages[step]})
 // },[]);
@@ -63,46 +124,39 @@ const machinemessages = [
 // messages.push({message:machinemessages[step]})
 
 
-const setMessages =(message) =>{
-let steplocal = step
-let user = message
-setStep(steplocal + 1)  
-if(user!==''){
-  user = 'machine'
-}else{
-  user= 'user'
-}
-messages.push({message:machinemessages[step],user:user})
-console.log(messages)
 
-}
+
+
+console.log(name)
+
+
   return(
   <div className="Box">
     <h1>{step}</h1>
     {machinemessages[step]}
   
 
-    <Formik
+    <Formik 
       initialValues={values}
-      // validate={values => {
-      //   const errors = {};
-      //   if (!values.email) {
-      //     errors.email = 'Required';
-      //   } else if (
-      //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      //   ) {
-      //     errors.email = 'Invalid email address';
-      //   }
-      //   return errors;
-      // }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      validate={values => {
+        const errors = {};
+        // if (!values.email) {
+        //   errors.email = 'Required';
+        // } else if (
+        //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        // ) {
+        //   errors.email = 'Invalid email address';
+        // }
+        return errors;
       }}
+      onSubmit={(values, { setSubmitting }) => {
+        alert(JSON.stringify(values, null, 2));
+        setSubmitting(false);
+      }}
+      // onSubmit={(e)=>nextSteps(e)}
     >
       {({
+        
         values,
         errors,
         touched,
@@ -112,7 +166,10 @@ console.log(messages)
         isSubmitting,
         /* and other goodies */
       }) => (
-        <form >
+        <form onSubmit={handleSubmit}
+        
+        
+        >
           {/* <input
             type="email"
             name="email"
@@ -135,37 +192,48 @@ console.log(messages)
             </div>
             ))}
           
-          <Ballon
+          {/* <Ballon
           message='Bom dia vida como vc acordou hj? linda como sempre?'
           user='user'
           
-          />
+          /> */}
           
-          <Input 
-          // handleChange={handleChange}
-          // handleBlur={handleBlur}
+          {/* <Input 
+          handleChange={handleChange}
+          handleBlur={handleBlur}
           values={values}
-          placeholder={configInput[step].placeholder}
+          //placeholder={configInput[step].placeholder}
           name={configInput[step].name}
           step={step}
           type={configInput[step].type}
+          defaultvalue={value}
           />
-
-
-
-          
-          {errors.password && touched.password && errors.password}
-          <button type="submit" disabled={isSubmitting}>
+           */}
+          <button type="submit" disabled={false}>
             Submit
           </button>
-          {/* <button type="button" 
-          disabled={isSubmitting}
-          onClick={() => setMessages('teste')}>
-            avaçar
-          </button> */}
-        </form>
+                   
+        </form>     
+        
       )}
     </Formik>
+    <input className = "input"
+                  placeholder = "Consulte aqui"
+                  type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[step].name}
+                  step={step}
+                  type={configInput[step].type}
+                  defaultvalue={value}
+                  />
+    <button type="button" 
+          // disabled={isSubmitting}
+          onClick={() => click()}>
+            avaçar
+          </button>              
+   
   </div>
 );
 }
