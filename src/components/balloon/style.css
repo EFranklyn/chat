@@ -1,0 +1,51 @@
+.userboxdiv{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.machineboxdiv{
+    display: flex;
+    flex-direction: row;
+}
+.baloon{
+    
+    /* background: #7e57c2; */
+    font-family: 'open sans';
+    font-size: 0.85em;
+    /* line-height: 1.6em;   */
+    border-radius: 15px;
+    width: 70%;
+    height: auto;
+    color: #fff;
+    padding: 20px;
+    /* position: relative; */
+    margin-top: 30px;
+   
+    align-items: end;
+}
+
+.userbaloon{
+    display: flex;
+    flex-direction: row-reverse;
+    background: firebrick;
+    margin-right: 2% ;
+
+}
+.machinebaloon{
+    margin: right; 
+    margin-left: 2%;
+    right: 2px;
+    background: forestgreen;
+
+}
+
+.message{
+    width: 100%;
+    
+    
+}
+.usermessage{
+    text-align: end;
+}
+.machinemessage{
+    text-align: start;
+}
