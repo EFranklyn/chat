@@ -3,16 +3,30 @@ import { Formik } from 'formik';
 import './style.css';
 import Input from '../components/input';
 import Ballon from '../components/balloon';
+import * as yup from 'yup';
+
+const addressSchema = yup.object().shape({
+ 
+  name: yup
+      .string()
+      .required(),
+  // city: yup
+  //     .string()
+  //     .required(),    
+
+
+ 
+});
 
 const values ={
-name:'',
-city:'',
-dtnasc:'',
-email:'',
-score:''
+// name:'',
+// city:'',
+// dtnasc:'',
+// email:'elisson.franklyn@gmail.com',
+// score:''
 }
 const configInput =[{
-  placeholder:'teste',
+  placeholder:'Nome',
   name:'name',
   type:'name'
 },
@@ -36,24 +50,11 @@ const configInput =[{
   score:'score',
   type:''
 
-}
-
-]
-
+}]
 const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
                   user:'machine'
-},
-
-
+                  },
 ]
-
-// let machinemessages = [
- 
-//   `Que satirfação ${values.name}. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
-//   `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
-//   `agora me fala teu email, por favor`,
-//   `você finalizou o teste faça uma avaliação`
-//   ]  
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[value,setValue] = React.useState('') 
@@ -62,44 +63,51 @@ const[machinemessages,setMachinemessages] = React.useState([`Que satirfação na
   `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
   `agora me fala teu email, por favor`,
   `você finalizou o teste faça uma avaliação`
-  ]  ) 
-// const[messages,setMessage] = React.useState([])
+  ])
+
 const keydown = e =>{
   if (e.keyCode === 13){
-    
     nextSteps()
   }  
-
 }
 const change = e =>{
   setValue(e.target.value)
-
 }  
 const click = async e  =>{    
   nextSteps()
-
 }
 
-const nextSteps = () =>{ 
-if(value ===''){
-  return
-}
- 
-if(step===0){
-  values.name = value  
-}
-if(step===1){
-  values.city = value  
-}
-if(step===2){
-  values.dtnasc = value  
-}
-if(step===3){
-  values.email = value  
-}
-if(step===3){
-  values.score = value  
-}
+
+
+async function nextSteps(){ 
+  if(step===0){
+    values['name'] = value  
+  }
+  if(step===1){
+    values['city'] = value  
+  }
+  if(step===2){
+    values['dtnasc'] = value  
+  }
+  if(step===3){
+    values['email'] = value  
+  }
+  if(step===4){
+    values['score'] = value  
+  }
+  
+  const validate = await addressSchema
+  .isValid(values)
+  .then(function(valid) {
+      return valid
+    
+  });
+  alert(value)
+  alert(validate)
+  if(!validate){
+    return
+  }
+  
 
 
 setStep(step + 1) 
@@ -133,11 +141,11 @@ console.log(name)
   return(
   <div className="Box">
     <h1>{step}</h1>
-    {machinemessages[step]}
   
 
     <Formik 
       initialValues={values}
+      // validationSchema={addressSchema}
       validate={values => {
         const errors = {};
         // if (!values.email) {
@@ -179,36 +187,14 @@ console.log(name)
           /> */}
           
           {errors.email && touched.email && errors.email}
-
-
           {messages.map((message) => ( 
             <div>
             <Ballon
             message={message.message}
             user={message.user}
             />
-            
-            
             </div>
             ))}
-          
-          {/* <Ballon
-          message='Bom dia vida como vc acordou hj? linda como sempre?'
-          user='user'
-          
-          /> */}
-          
-          {/* <Input 
-          handleChange={handleChange}
-          handleBlur={handleBlur}
-          values={values}
-          //placeholder={configInput[step].placeholder}
-          name={configInput[step].name}
-          step={step}
-          type={configInput[step].type}
-          defaultvalue={value}
-          />
-           */}
           <button type="submit" disabled={false}>
             Submit
           </button>
@@ -224,6 +210,7 @@ console.log(name)
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
                   name={configInput[step].name}
+                  placeholder={configInput[step].placeholder}
                   step={step}
                   type={configInput[step].type}
                   defaultvalue={value}
