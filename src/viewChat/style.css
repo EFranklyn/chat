@@ -3,7 +3,8 @@
     background-color: aquamarine;
     margin-left: 2%;
     margin-right: 2%;
-    height: 600px;
+    /* height: 600px; */
+    margin-top: 2%;
     /* display: block; */
     overflow: scroll auto;
     overflow-y: scroll auto;
@@ -11,3 +12,24 @@
     flex-direction: column; */
 
   }
+
+  .elementsfooter{
+    margin-top: 20%;
+    margin-left: 4%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    /* background: firebrick; */
+    margin-right: 2% ;
+    
+
+}
+.input{
+  width: 350px;
+  height: 35px;
+}
+.button{  
+    margin-left: 2%;
+    width: 100px;
+    
+}

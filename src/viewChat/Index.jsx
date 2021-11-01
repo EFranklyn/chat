@@ -102,8 +102,7 @@ async function nextSteps(){
       return valid
     
   });
-  alert(value)
-  alert(validate)
+
   if(!validate){
     return
   }
@@ -113,34 +112,20 @@ async function nextSteps(){
 setStep(step + 1) 
 
   
-  values.name = value
+  // values.name = value
   messages.push({message:value,user:'user'}) 
   messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
   setValue('')
+  window.scrollTo({top:500,behavior:'smooth'})
   
 
   
 }
-
-
-
-
-// React.useEffect(() => {
-//   messages.push({message:machinemessages[step]})
-// },[]);
-
-// messages.push({message:machinemessages[step]})
-
-
-
-
-
 console.log(name)
 
 
   return(
   <div className="Box">
-    <h1>{step}</h1>
   
 
     <Formik 
@@ -148,23 +133,16 @@ console.log(name)
       // validationSchema={addressSchema}
       validate={values => {
         const errors = {};
-        // if (!values.email) {
-        //   errors.email = 'Required';
-        // } else if (
-        //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        // ) {
-        //   errors.email = 'Invalid email address';
-        // }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
+        if(step===3){
         alert(JSON.stringify(values, null, 2));
+        }
         setSubmitting(false);
       }}
-      // onSubmit={(e)=>nextSteps(e)}
     >
-      {({
-        
+      {({       
         values,
         errors,
         touched,
@@ -175,17 +153,7 @@ console.log(name)
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit}
-        
-        
         >
-          {/* <input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-          /> */}
-          
           {errors.email && touched.email && errors.email}
           {messages.map((message) => ( 
             <div>
@@ -195,15 +163,13 @@ console.log(name)
             />
             </div>
             ))}
-          <button type="submit" disabled={false}>
+          <div className='elementsfooter'>  
+          {/* <button type="submit" disabled={false}>
             Submit
-          </button>
-                   
-        </form>     
-        
-      )}
-    </Formik>
-    <input className = "input"
+          </button>   */}
+          </div>
+          <div className='elementsfooter'>
+          <input className = " input"
                   placeholder = "Consulte aqui"
                   type="Number"
                   value={value}
@@ -215,11 +181,20 @@ console.log(name)
                   type={configInput[step].type}
                   defaultvalue={value}
                   />
-    <button type="button" 
-          // disabled={isSubmitting}
-          onClick={() => click()}>
+         <button type="button"
+              className="button"
+              onClick={() => click()}
+              // type="submit"
+              >
+                
             avaçar
-          </button>              
+          </button>     
+          </div>                    
+        </form>     
+        
+      )}
+    </Formik>
+          
    
   </div>
 );
