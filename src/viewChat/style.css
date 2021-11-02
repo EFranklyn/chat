@@ -1,13 +1,15 @@
-.Box {
+.viewmessage {
     
     background-color: aquamarine;
     margin-left: 2%;
     margin-right: 2%;
-    height: 450px;
+    /* height: 450px; */
     margin-top: 2%;
+    margin-bottom: 5%;
     /* display: block; */
-    overflow: scroll auto;
-    overflow-y: scroll auto;
+    /* overflow: scroll x; */
+    /* overflow-y: scroll auto;
+    overflow-x: none; */
     /* display: flex;
     flex-direction: column; */
 
