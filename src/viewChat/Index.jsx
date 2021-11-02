@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react'
 import { Formik } from 'formik';
 import './style.css';
 import Input from '../components/input';
@@ -96,27 +96,32 @@ const[machinemessages,setMachinemessages] = React.useState([
   {
     message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
     user:'machine',
-    display:"start"
+    display:"start",
+    id:"1"
   },
   {
     message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
     user:'machine',
-    display:"none"
+    display:"none",
+    id:"2"
   },
   {
     message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
     user:'machine',
-    display:"none"
+    display:"none",
+    id:"3"
   },
   {
     message:`agora me fala teu email, por favor`,
     user:'machine',
-    display:"none"
+    display:"none",
+    id:"4"
   },
   {
     message:`você finalizou o teste faça uma avaliação`,
     user:'machine',
-    display:"none"
+    display:"none",
+    id:"5"
   }
   
 
@@ -165,17 +170,22 @@ async function nextSteps(){
   // }
   
 
+if(step<5){
+    setStep(step + 1)
+    window.location.href = `#${machinemessages[step].id}` 
+}
+// setTimeout(2)
 
-setStep(step + 1) 
+// document.getElementById(step).scrollIntoView();
 
   
   // values.name = value
   // messages.push({message:value,user:'user'}) 
   // messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
-  setValue('')
-  window.scrollTo({top:5000,behavior:'smooth'})
-  
-
+  // setValue('')
+  // window.scrollTo({top:0,behavior:'smooth'})
+  // window.scrollTo(5000000,5000000)
+  await window.scroll(0, 0);
   
 }
 console.log(name)
@@ -228,17 +238,19 @@ console.log(name)
             />
             <Ballon user="user"
             display={machinemessages[0].display}>                       
-             <div className="containerfooter"> 
+             <div className="containerfooter"
+              id={machinemessages[0].id}
+             > 
               <div className='elementsfooter'>
                 <input className = "input"
                   // type="Number"
                   value={value}
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
-                  name={configInput[step].name}
-                  placeholder={configInput[step].placeholder}
+                  name={configInput[0].name}
+                  placeholder={configInput[0].placeholder}
                   // step={step}
-                  type={configInput[step].type}
+                  type={configInput[0].type}
                   // defaultvalue={value}
                   
                   />
@@ -251,127 +263,137 @@ console.log(name)
                 </button>     
               </div>  
               </div>
+              <span id={machinemessages[0].id}></span>
             </Ballon>
-          {step == 1 ? 
+
+
+            {/* step 1 */}
+          {step >= 1 ? 
           <div>
           <Ballon
           message={machinemessages[1].message}
           user={machinemessages[1].user}
           display={machinemessages[1].display}
       />
-      console.log({machinemessages[1].display})
       <Ballon user="user"
-      display={machinemessages[1].display}>                       
-        <div className='elementsfooter'>
-          <input className = "input"
-            // type="Number"
-            value={value}
-            onChange={(e) => change(e)}
-            onKeyDown={(e) => keydown(e)} 
-            name={configInput[1].name}
-            placeholder={configInput[1].placeholder}
-            // step={step}
-            type={configInput[1].type}
-            // defaultvalue={value}
-            />
-          <button type="button"
-              className="button"
-              onClick={() => click()}
-              // type="submit"
-              >              
-          avaçar
-          </button>     
-        </div>                
-      </Ballon>
-      </div>:'s'} 
-            
-{/*             
-            <Ballon
-                message={machinemessages[2].message}
-                user={machinemessages[2].user}
-                display={machinemessages[2].display}
-            />
-            <Ballon user="user"
-            display={machinemessages[2].display}>                       
+            display={machinemessages[1].display}>                       
+             <div className="containerfooter"> 
               <div className='elementsfooter'>
                 <input className = "input"
-                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[1].name}
+                  placeholder={configInput[1].placeholder}
+                  type={configInput[1].type}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    >              
+                avaçar
+                </button>     
+              </div>  
+              </div>
+            </Ballon>
+            <span id={machinemessages[1].id}></span>
+      </div>:null} 
+      
+      {step >= 2 ? 
+          <div>
+          <Ballon
+          message={machinemessages[2].message}
+          user={machinemessages[2].user}
+          display={machinemessages[2].display}
+      />
+      <Ballon user="user"
+            display={machinemessages[2].display}>                       
+             <div className="containerfooter"> 
+              <div className='elementsfooter'>
+                <input className = "input"
                   value={value}
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
                   name={configInput[2].name}
                   placeholder={configInput[2].placeholder}
-                  // step={step}
                   type={configInput[2].type}
-                  // defaultvalue={value}
                   />
                 <button type="button"
                     className="button"
                     onClick={() => click()}
-                    // type="submit"
                     >              
                 avaçar
                 </button>     
               </div>  
+              </div>
             </Ballon>
-
-            <Ballon
-                message={machinemessages[3].message}
-                user={machinemessages[3].user}
-                display={machinemessages[3].display}
-            />
-            <Ballon user="user"
+            <div id={machinemessages[2].id}></div>
+      </div>
+      :null} 
+      {/* step 3 */}
+      {step >= 3 ? 
+          <div>
+          <Ballon
+          message={machinemessages[3].message}
+          user={machinemessages[3].user}
+          display={machinemessages[3].display}
+      />
+      <Ballon user="user"
             display={machinemessages[3].display}>                       
+             <div className="containerfooter"> 
               <div className='elementsfooter'>
                 <input className = "input"
-                  // type="Number"
                   value={value}
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
-                  name={configInput[3].name}
+                  name={configInput[2].name}
                   placeholder={configInput[3].placeholder}
-                  // step={step}
                   type={configInput[3].type}
-                  // defaultvalue={value}
                   />
                 <button type="button"
                     className="button"
                     onClick={() => click()}
-                    // type="submit"
                     >              
                 avaçar
                 </button>     
               </div>  
+              </div>
+              <span id={machinemessages[3].id}></span>
             </Ballon>
-            <Ballon
-                message={machinemessages[4].message}
-                user={machinemessages[4].user}
-                display={machinemessages[4].display}
-            />
-            <Ballon user="user"
+      </div>:null} 
+       {/* step 4 */}
+       {step >= 4 ? 
+          <div>
+          <Ballon
+          message={machinemessages[4].message}
+          user={machinemessages[4].user}
+          display={machinemessages[3].display}
+      />
+      <Ballon user="user"
             display={machinemessages[4].display}>                       
-              <div className='elementsfooter'>
+             <div className="containerfooter"> 
+              <div className='elementsfooter'
+              id={machinemessages[4].id}>
                 <input className = "input"
-                  // type="Number"
                   value={value}
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
                   name={configInput[4].name}
                   placeholder={configInput[4].placeholder}
-                  // step={step}
                   type={configInput[4].type}
-                  // defaultvalue={value}
                   />
                 <button type="button"
                     className="button"
                     onClick={() => click()}
-                    // type="submit"
                     >              
                 avaçar
                 </button>     
               </div>  
-            
-            </Ballon> */}
+              </div>
+            </Ballon>
+      </div>:null} 
+    
+
           <div className='elementsfooter'>  
           {/* <button type="submit" disabled={false}>
             Submit
