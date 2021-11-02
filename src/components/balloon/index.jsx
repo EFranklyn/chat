@@ -10,11 +10,13 @@ export default function Ballon(props){
    return(
     <div className={`${props.user}boxdiv`}> 
     <div className={classeUserBaloon}>
-     <div >
+   
        <p className={classeUserp}> 
             {props.message}
+            {props.children}
        </p>
-      </div>
+       
+ 
     </div>
     </div>
   );

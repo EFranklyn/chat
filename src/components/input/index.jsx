@@ -7,17 +7,26 @@ export default function Input(props){
  
 
     return(
-    <div >     
-            <input
-              type={props.type}
-              name={props.name}
-              // onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              values={props.values}
-              defaultValue={props.value}
-            />
-            {props.step}
-    </div>
+    <div className='elementsfooter'>  
+      <input className = "input"
+          // type="Number"
+          value={props.value}
+          onChange={(e)=>props.change(e)}
+          onKeyDown={(e) => props.keydown} 
+          name={props.name}
+          placeholder={props.placeholder}
+          step={props.step}
+          type={props.type}
+          />
+      <button type="button"
+          className="button"
+          onClick={props.click}
+          // type="submit"
+          >
+            
+        avaçar
+      </button>     
+      </div>  
   );
   }
   

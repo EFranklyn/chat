@@ -1,6 +1,7 @@
 .userboxdiv{
     display: flex;
     flex-direction: row-reverse;
+    align-items: flex-end;
 }
 .machineboxdiv{
     display: flex;
@@ -44,6 +45,7 @@
     
 }
 .usermessage{
+    align-items: flex-end;
     text-align: end;
 }
 .machinemessage{

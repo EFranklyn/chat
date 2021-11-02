@@ -51,6 +51,39 @@ const configInput =[{
   type:''
 
 }]
+const machinemessages=[
+  {
+    message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
+    user:'machine',
+    display:"start"
+  },
+  {
+    message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
+    user:'machine',
+    display:"start"
+  },
+  {
+    message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
+    user:'machine',
+    display:"start"
+  },
+  {
+    message:`agora me fala teu email, por favor`,
+    user:'machine',
+    display:"start"
+  },
+  {
+    message:`você finalizou o teste faça uma avaliação`,
+    user:'machine',
+    display:"start"
+  },
+  
+
+]
+
+
+
+
 const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
                   user:'machine'
                   },
@@ -59,11 +92,11 @@ export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[value,setValue] = React.useState('') 
 const[name,setName] = React.useState('') 
-const[machinemessages,setMachinemessages] = React.useState([`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
-  `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
-  `agora me fala teu email, por favor`,
-  `você finalizou o teste faça uma avaliação`
-  ])
+// const[machinemessages,setMachinemessages] = React.useState([`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
+//   `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
+//   `agora me fala teu email, por favor`,
+//   `você finalizou o teste faça uma avaliação`
+//   ])
 
 const keydown = e =>{
   if (e.keyCode === 13){
@@ -155,14 +188,148 @@ console.log(name)
         <form onSubmit={handleSubmit}
         >
           {errors.email && touched.email && errors.email}
-          {messages.map((message) => ( 
+          {/* {messages.map((message) => ( 
             <div>
             <Ballon
             message={message.message}
             user={message.user}
             />
             </div>
-            ))}
+            ))} */}
+
+            <Ballon
+                message={machinemessages[0].message}
+                user={machinemessages[0].user}
+            />
+            <Ballon user="user">                       
+              <div className='elementsfooter'>
+                <input className = "input"
+                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[step].name}
+                  placeholder={configInput[step].placeholder}
+                  // step={step}
+                  type={configInput[step].type}
+                  // defaultvalue={value}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    // type="submit"
+                    >              
+                avaçar
+                </button>     
+              </div>  
+            </Ballon>
+
+            <Ballon
+                message={machinemessages[1].message}
+                user={machinemessages[1].user}
+            />
+            <Ballon user="user">                       
+              <div className='elementsfooter'>
+                <input className = "input"
+                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[1].name}
+                  placeholder={configInput[1].placeholder}
+                  // step={step}
+                  type={configInput[1].type}
+                  // defaultvalue={value}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    // type="submit"
+                    >              
+                avaçar
+                </button>     
+              </div>  
+            </Ballon>
+            <Ballon
+                message={machinemessages[2].message}
+                user={machinemessages[2].user}
+            />
+            <Ballon user="user">                       
+              <div className='elementsfooter'>
+                <input className = "input"
+                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[2].name}
+                  placeholder={configInput[2].placeholder}
+                  // step={step}
+                  type={configInput[2].type}
+                  // defaultvalue={value}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    // type="submit"
+                    >              
+                avaçar
+                </button>     
+              </div>  
+            </Ballon>
+
+            <Ballon
+                message={machinemessages[3].message}
+                user={machinemessages[3].user}
+            />
+            <Ballon user="user">                       
+              <div className='elementsfooter'>
+                <input className = "input"
+                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[3].name}
+                  placeholder={configInput[3].placeholder}
+                  // step={step}
+                  type={configInput[3].type}
+                  // defaultvalue={value}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    // type="submit"
+                    >              
+                avaçar
+                </button>     
+              </div>  
+            </Ballon>
+            <Ballon
+                message={machinemessages[4].message}
+                user={machinemessages[4].user}
+            />
+            <Ballon user="user">                       
+              <div className='elementsfooter'>
+                <input className = "input"
+                  // type="Number"
+                  value={value}
+                  onChange={(e) => change(e)}
+                  onKeyDown={(e) => keydown(e)} 
+                  name={configInput[4].name}
+                  placeholder={configInput[4].placeholder}
+                  // step={step}
+                  type={configInput[4].type}
+                  // defaultvalue={value}
+                  />
+                <button type="button"
+                    className="button"
+                    onClick={() => click()}
+                    // type="submit"
+                    >              
+                avaçar
+                </button>     
+              </div>  
+            
+            </Ballon>
           <div className='elementsfooter'>  
           {/* <button type="submit" disabled={false}>
             Submit
