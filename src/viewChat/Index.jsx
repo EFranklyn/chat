@@ -32,12 +32,12 @@ const configInput =[{
 },
 {
   placeholder:'Cidade',
-  name:'city',
+  name:'name',
   type:''
 },
 {
   placeholder:'Data de Nascimento',
-  name:'dtnasc',
+  name:'date',
   type:'date'
 },
 {
@@ -116,7 +116,7 @@ setStep(step + 1)
   messages.push({message:value,user:'user'}) 
   messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
   setValue('')
-  window.scrollTo({top:500,behavior:'smooth'})
+  window.scrollTo({top:5000,behavior:'smooth'})
   
 
   
@@ -169,17 +169,16 @@ console.log(name)
           </button>   */}
           </div>
           <div className='elementsfooter'>
-          <input className = " input"
-                  placeholder = "Consulte aqui"
-                  type="Number"
+          <input className = "input"
+                  // type="Number"
                   value={value}
                   onChange={(e) => change(e)}
                   onKeyDown={(e) => keydown(e)} 
                   name={configInput[step].name}
                   placeholder={configInput[step].placeholder}
-                  step={step}
+                  // step={step}
                   type={configInput[step].type}
-                  defaultvalue={value}
+                  // defaultvalue={value}
                   />
          <button type="button"
               className="button"

@@ -25,6 +25,7 @@
 
 }
 .input{
+  display: none;
   width: 350px;
   height: 35px;
 }
