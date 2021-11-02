@@ -15,23 +15,30 @@
 
   .elementsfooter{
     /* margin-top: 20%; */
-    margin-left: 4%;
-
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+    margin-left: 4%;    
     /* background: firebrick; */
     margin-right: 2% ;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+  
     
 
 }
 .input{
-
-  width: 350px;
+  /* margin-top: -2%; */
+  width: 70%;
   height: 35px;
 }
-.button{  
-    margin-left: 2%;
-    width: 100px;
+.button{
+  margin-left: 2%;
+  width: 30%;
+  height: 41px;
+  
     
+}
+.containerfooter{
+  display: flex;
+  flex-direction: row-reverse;
 }

@@ -60,22 +60,22 @@ const machinemessages=[
   {
     message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
     user:'machine',
-    display:"start"
+    display:"none"
   },
   {
     message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
     user:'machine',
-    display:"start"
+    display:"none"
   },
   {
     message:`agora me fala teu email, por favor`,
     user:'machine',
-    display:"start"
+    display:"none"
   },
   {
     message:`você finalizou o teste faça uma avaliação`,
     user:'machine',
-    display:"start"
+    display:"none"
   },
   
 
@@ -84,19 +84,43 @@ const machinemessages=[
 
 
 
-const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
-                  user:'machine'
-                  },
-]
+// const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
+//                   user:'machine'
+//                   },
+// ]
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[value,setValue] = React.useState('') 
 const[name,setName] = React.useState('') 
-// const[machinemessages,setMachinemessages] = React.useState([`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
-//   `Legal, agora que sabemos sua cidade e estado quando foi que você nasceu ?`,
-//   `agora me fala teu email, por favor`,
-//   `você finalizou o teste faça uma avaliação`
-//   ])
+const[machinemessages,setMachinemessages] = React.useState([
+  {
+    message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
+    user:'machine',
+    display:"start"
+  },
+  {
+    message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
+    user:'machine',
+    display:"none"
+  },
+  {
+    message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
+    user:'machine',
+    display:"none"
+  },
+  {
+    message:`agora me fala teu email, por favor`,
+    user:'machine',
+    display:"none"
+  },
+  {
+    message:`você finalizou o teste faça uma avaliação`,
+    user:'machine',
+    display:"none"
+  }
+  
+
+])
 
 const keydown = e =>{
   if (e.keyCode === 13){
@@ -129,16 +153,16 @@ async function nextSteps(){
     values['score'] = value  
   }
   
-  const validate = await addressSchema
-  .isValid(values)
-  .then(function(valid) {
-      return valid
+  // const validate = await addressSchema
+  // .isValid(values)
+  // .then(function(valid) {
+  //     return valid
     
-  });
+  // });
 
-  if(!validate){
-    return
-  }
+  // if(!validate){
+  //   return
+  // }
   
 
 
@@ -146,8 +170,8 @@ setStep(step + 1)
 
   
   // values.name = value
-  messages.push({message:value,user:'user'}) 
-  messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
+  // messages.push({message:value,user:'user'}) 
+  // messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
   setValue('')
   window.scrollTo({top:5000,behavior:'smooth'})
   
@@ -160,7 +184,7 @@ console.log(name)
   return(
   <div className="Box">
   
-
+ <h1>{step}</h1>
     <Formik 
       initialValues={values}
       // validationSchema={addressSchema}
@@ -200,8 +224,11 @@ console.log(name)
             <Ballon
                 message={machinemessages[0].message}
                 user={machinemessages[0].user}
+                display={machinemessages[0].display}
             />
-            <Ballon user="user">                       
+            <Ballon user="user"
+            display={machinemessages[0].display}>                       
+             <div className="containerfooter"> 
               <div className='elementsfooter'>
                 <input className = "input"
                   // type="Number"
@@ -213,6 +240,7 @@ console.log(name)
                   // step={step}
                   type={configInput[step].type}
                   // defaultvalue={value}
+                  
                   />
                 <button type="button"
                     className="button"
@@ -222,39 +250,49 @@ console.log(name)
                 avaçar
                 </button>     
               </div>  
+              </div>
             </Ballon>
-
-            <Ballon
-                message={machinemessages[1].message}
-                user={machinemessages[1].user}
+          {step == 1 ? 
+          <div>
+          <Ballon
+          message={machinemessages[1].message}
+          user={machinemessages[1].user}
+          display={machinemessages[1].display}
+      />
+      console.log({machinemessages[1].display})
+      <Ballon user="user"
+      display={machinemessages[1].display}>                       
+        <div className='elementsfooter'>
+          <input className = "input"
+            // type="Number"
+            value={value}
+            onChange={(e) => change(e)}
+            onKeyDown={(e) => keydown(e)} 
+            name={configInput[1].name}
+            placeholder={configInput[1].placeholder}
+            // step={step}
+            type={configInput[1].type}
+            // defaultvalue={value}
             />
-            <Ballon user="user">                       
-              <div className='elementsfooter'>
-                <input className = "input"
-                  // type="Number"
-                  value={value}
-                  onChange={(e) => change(e)}
-                  onKeyDown={(e) => keydown(e)} 
-                  name={configInput[1].name}
-                  placeholder={configInput[1].placeholder}
-                  // step={step}
-                  type={configInput[1].type}
-                  // defaultvalue={value}
-                  />
-                <button type="button"
-                    className="button"
-                    onClick={() => click()}
-                    // type="submit"
-                    >              
-                avaçar
-                </button>     
-              </div>  
-            </Ballon>
+          <button type="button"
+              className="button"
+              onClick={() => click()}
+              // type="submit"
+              >              
+          avaçar
+          </button>     
+        </div>                
+      </Ballon>
+      </div>:'s'} 
+            
+{/*             
             <Ballon
                 message={machinemessages[2].message}
                 user={machinemessages[2].user}
+                display={machinemessages[2].display}
             />
-            <Ballon user="user">                       
+            <Ballon user="user"
+            display={machinemessages[2].display}>                       
               <div className='elementsfooter'>
                 <input className = "input"
                   // type="Number"
@@ -280,8 +318,10 @@ console.log(name)
             <Ballon
                 message={machinemessages[3].message}
                 user={machinemessages[3].user}
+                display={machinemessages[3].display}
             />
-            <Ballon user="user">                       
+            <Ballon user="user"
+            display={machinemessages[3].display}>                       
               <div className='elementsfooter'>
                 <input className = "input"
                   // type="Number"
@@ -306,8 +346,10 @@ console.log(name)
             <Ballon
                 message={machinemessages[4].message}
                 user={machinemessages[4].user}
+                display={machinemessages[4].display}
             />
-            <Ballon user="user">                       
+            <Ballon user="user"
+            display={machinemessages[4].display}>                       
               <div className='elementsfooter'>
                 <input className = "input"
                   // type="Number"
@@ -329,14 +371,14 @@ console.log(name)
                 </button>     
               </div>  
             
-            </Ballon>
+            </Ballon> */}
           <div className='elementsfooter'>  
           {/* <button type="submit" disabled={false}>
             Submit
           </button>   */}
           </div>
           <div className='elementsfooter'>
-          <input className = "input"
+          {/* <input className = "input"
                   // type="Number"
                   value={value}
                   onChange={(e) => change(e)}
@@ -354,7 +396,7 @@ console.log(name)
               >
                 
             avaçar
-          </button>     
+          </button>      */}
           </div>                    
         </form>     
         
