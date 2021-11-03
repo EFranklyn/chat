@@ -6,8 +6,7 @@ export default function Ballon(props){
    
    const classeUserp ='message'+ ' '  + props.user+ 'message'  
    const classeUserBaloon ='baloon'+' '  + props.user + 'baloon'
-
-
+ 
    return(
     <div className={`${props.user}boxdiv `}> 
     <div className={classeUserBaloon}>
@@ -18,13 +17,16 @@ export default function Ballon(props){
        </p>
        {props.user === 'user'?
        <di>
+         {props.erro?props.erro:null}
          <div className="containerfooter">
           <div className='elementsfooter'>
                 <input
                   className = "input"
+                  mask="99/99/9999"
                   value={props.value}
                   onChange={(e)=>props.change(e)}
-                  onKeyPress = {e => {e.Keycode === 13 && e.preventDefault ()}}
+                  // onKeyPress = {e => { e.which === 13 && props.keypress(e) && e.preventDefault ()
+                  // }}
                   name={props.name}
                   placeholder={props.placeholder}
                   type={props.type}

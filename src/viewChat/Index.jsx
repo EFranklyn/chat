@@ -15,6 +15,7 @@ const addressSchema = yup.object().shape({
       .required('cidade incorreta'),
   dtnasc: yup
       .date()
+      .required('data incorreta')
       .default(() => (new Date())),  
   email: yup
       .string()
@@ -28,7 +29,7 @@ const addressSchema = yup.object().shape({
       .integer(),
 });
 
-const values ={
+const valuesSend ={
 name:'',
 city:'',
 dtnasc:'',
@@ -106,6 +107,8 @@ const machinemessages=[
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[send,setSend] = React.useState(false)
+console.log(new Date('1995-04-30'))
+// new SimpleDateFormat("dd/MM/yyyy"); 
  
 const[machinemessages,setMachinemessages] = React.useState([
   {
@@ -142,19 +145,17 @@ const[machinemessages,setMachinemessages] = React.useState([
 
 ])
 
-const keydown  = e =>{
-  e.preventDefault() 
-  if (send !== true && e.Keycode === 13){
-    if(e.target.value !== ''){
-      nextSteps()
+const keypress  = async e =>{
+  console.log(e)
+  if(e.target.value !== '' && e.code === 'Enter'){
+    nextSteps()
     }
-  
-  }
-  nextSteps()
   
 }
 const click = async e  =>{    
-  nextSteps()
+  
+    nextSteps()
+   
 }
 
 
@@ -180,6 +181,12 @@ if(step<5){
   // await window.scroll(0, 0);
   
 }
+const maskDate = (value) => {
+    // alert(value)
+    console.log(value.length)
+    
+  return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{4})(\d)/, "$1");
+}
 
 
   return(
@@ -198,10 +205,39 @@ if(step<5){
         dtnasc:'',
         email:'',
         score:''
-        }}
+        }}  
       validationSchema={addressSchema}
       validate={values => {
+        let date
         const errors = {};
+        if(values.name!==''){
+          valuesSend.name = values.name 
+        }
+        if(values.city!==''){
+          valuesSend.city = values.city 
+        }
+        if(values.dtnasc.length === 10){
+           valuesSend.dtnasc = values.dtnasc.split('/').reverse().join('-') + "T00:00:00.00Z"
+           //values.dtnasc = new Date(values.dtnasc)
+           date =  values.dtnasc.split('/').reverse().join('-')
+           let objdate = new Date(date)
+           if(String(objdate)==='Invalid Date'){
+            alert(date)
+           }
+        }
+        if(values.email!==''){
+          valuesSend.email = values.email 
+        }
+        if(values.email!==''){
+          valuesSend.email = values.email 
+        }
+        if(values.score!==''){
+          valuesSend.score = values.score 
+        }
+        
+        console.log(date)
+        console.log(valuesSend)
+        console.log(errors)
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -223,7 +259,9 @@ if(step<5){
       }) => (
         <form onSubmit={handleSubmit}
         >
-          {errors.email && errors.name && errors.city}
+          {`${errors.name} ${values.city = Boolean(errors.city)}
+          ${errors.dtnasc} ${values.dtnasc}`  
+        }
             <Ballon
                 message={machinemessages[0].message}
                 user={machinemessages[0].user}
@@ -236,10 +274,11 @@ if(step<5){
               change={handleChange}
               blur={handleBlur}
               name={"name"}
-              keydown={keydown}
+              keypress={keypress}
               placeholder="Nome"
               type={"Text"}
               click={click}
+              erro={errors.name}
              >              
               <span id={machinemessages[0].id}></span>
             </Ballon>
@@ -256,12 +295,14 @@ if(step<5){
       <Ballon user="user"
               id={1}
               value={values.city}
+              keypress={keypress}
               change={handleChange}
               blur={handleBlur}
               name={"city"}
               placeholder="Cidade"
               type={"Text"}
               click={click}
+              erro={errors.city}
              >
       </Ballon>
             <span id={machinemessages[1].id}></span>
@@ -276,13 +317,15 @@ if(step<5){
 />
       <Ballon user="user"
               id={1}
-              value={values.dtnasc}
+              value={maskDate(values.dtnasc)}
+              keypress={keypress}
               change={handleChange}
               blur={handleBlur}
               name={"dtnasc"}
               placeholder="Data de nascimento"
-              type={"number"}
+              type={"Text"}
               click={click}
+              erro={errors.dtnasc}
              >              
       </Ballon>
       <div id={machinemessages[2].id}></div>
@@ -299,12 +342,14 @@ if(step<5){
       <Ballon user="user"
               id={1}
               value={values.email}
+              keypress={keypress}
               change={handleChange}
               blur={handleBlur}
               name={"email"}
               placeholder="Email"
               type={"Text"}
               click={click}
+              erro={errors.email}
              >              
       </Ballon>
         <span id={machinemessages[3].id}></span>
@@ -320,12 +365,14 @@ if(step<5){
 <Ballon user="user"
               id={1}
               value={values.score}
+              keypress={keypress}
               change={handleChange}
               blur={handleBlur}
               name={"score"}
               placeholder="Nota"
               type={"Number"}
               click={click}
+              erro={errors.score}
              >              
       </Ballon>
 </div>:null}
