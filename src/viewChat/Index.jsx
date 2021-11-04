@@ -15,9 +15,8 @@ const addressSchema = yup.object().shape({
       .string()
       .required('cidade incorreta'),
   dtnasc: yup
-      .date()
-      .required('data incorreta')
-      .default(() => (new Date())),  
+      .string()
+      .required('data incorreta'),
   email: yup
       .string()
       .email()
@@ -322,7 +321,7 @@ const maskDate = (value) => {
               placeholder="Nome"
               type={"Text"}
               click={click}
-              erro={errors.name}
+              erro={valuesErrorState.name}
              >              
               <span id={machinemessages[0].id}></span>
             </Ballon>
@@ -348,7 +347,7 @@ const maskDate = (value) => {
               placeholder="Cidade"
               type={"Text"}
               click={click}
-              erro={errors.city}
+              erro={valuesErrorState.city}
              >
       </Ballon>
             <span id={machinemessages[1].id}></span>
@@ -371,7 +370,7 @@ const maskDate = (value) => {
               placeholder="Data de nascimento"
               type={"Text"}
               click={click}
-              erro={errors.dtnasc}
+              erro={valuesErrorState.dtnasc}
              >              
       </Ballon>
       <div id={machinemessages[2].id}></div>
@@ -395,7 +394,7 @@ const maskDate = (value) => {
               placeholder="Email"
               type={"Text"}
               click={click}
-              erro={errors.email}
+              erro={valuesErrorState.email}
              >              
       </Ballon>
         <span id={machinemessages[3].id}></span>
@@ -418,7 +417,7 @@ const maskDate = (value) => {
               placeholder="Nota"
               type={"Number"}
               click={click}
-              erro={errors.score}
+              erro={valuesErrorState.score}
              >              
       </Ballon>
 </div>:null}
