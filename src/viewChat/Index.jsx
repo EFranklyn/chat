@@ -69,7 +69,7 @@ const[values,setValues] = React.useState({
     city: '',
     dtnasc: '',
     email: '',
-    score: 1
+    score: ''
   }) 
 const[machinemessages,setMachinemessages] = React.useState([
   {
@@ -126,7 +126,7 @@ const click =  e  =>{
 const validateColors = erros =>{
   valuesError.name = Boolean(erros.name)
   valuesError.city = Boolean(erros.city)  
-  valuesError.dtnasc = Boolean(erros.dtnasc) 
+  //valuesError.dtnasc = Boolean(erros.dtnasc) 
   valuesError.email = Boolean(erros.email) 
   valuesError.score = Boolean(erros.score)
  
@@ -170,20 +170,29 @@ if(step<5){
   // await window.scroll(0, 0);
   
 }
-const maskDate = (value) => {
-    // alert(value)
-    // console.log(value.length)
-    
+const maskDate = (value) => {    
   return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{4})(\d)/, "$1");
+
 }
 
+  const dayValidation = (date,dateobj) =>{
+    let dayDate = date.slice(0, 2)
+    let dayDateObj = dateobj.getDate()
+    let now = new Date()
+    if(dayDateObj && dayDateObj <= 9){
+      dayDateObj = '0' + String(dayDateObj)
+    }else{
+      dayDateObj = String(dayDateObj)
+    }
+    if(dayDate===dayDateObj && dateobj<now){
+      return true
+    }else{
+      return false
+    }
+  
+  }
 
   return(
-    // <div style={{backgroundColor: "aquamarine",
-    //             marginLeft:"2%",
-    //             marginRight:"2%",
-    //             height:"700px"
-    //             }}>
   <div className="viewmessage">
   
  <h1>{step}</h1>
@@ -194,38 +203,33 @@ const maskDate = (value) => {
         let date
         let objdate
         const errors = {};
+        date =  values.dtnasc.split('/').reverse().join('-') + "T03:00:00.00Z"
+                objdate = new Date(date)
+                if(checkData(objdate) && dayValidation(values.dtnasc,objdate)){
+                  valuesError.dtnasc = false
+                }else{
+                  valuesError.dtnasc = true
+                }
+
         if(!valuesError.name &&
           !valuesError.city &&
           !valuesError.dtnasc &&
           !valuesError.email &&
           !valuesError.score){
                 valuesSend.name = values.name
-                valuesSend.city = values.city
-                if(values.dtnasc.length === 10){
-                valuesSend.dtnasc = values.dtnasc.split('/').reverse().join('-') + "T00:00:00.00Z"
-                date =  values.dtnasc.split('/').reverse().join('-') + "T03:00:00.00Z"
-                let objdate = new Date(date)
-                if(String(objdate)==='Invalid Date'){
-                  alert(`${objdate}'data invalida'`)
-                }
-                if(checkData(objdate)) //segredo ta aqui lembre se
-                alert(`${objdate}'data invalida'`)
-              }              
+                valuesSend.city = values.city               
+                valuesSend.dtnasc = date
                 valuesSend.email = values.email 
                 valuesSend.email = values.email 
                 valuesSend.score = values.score 
-                console.log(Boolean(objdate))
-            }      
-        
-        // console.log(date)
-        // console.log(valuesSend)
-        // console.log(errors)
+                
+            } 
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
         // if(step===3){}
-        alert(JSON.stringify(values, null, 2));
-        sendData(JSON.stringify(values, null, 2))
+        alert(JSON.stringify(valuesSend, null, 2));
+        sendData(JSON.stringify(valuesSend, null, 2))
       
       }}
     >
@@ -309,7 +313,7 @@ const maskDate = (value) => {
               blur={handleBlur}
               name={"dtnasc"}
               placeholder="Data de nascimento"
-              type={"Text"}
+              type={"tel"}
               click={click}
               erro={valuesErrorState.dtnasc}
              >              

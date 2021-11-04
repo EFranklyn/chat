@@ -43,7 +43,6 @@ export default function Ballon(props){
           <div className='elementsfooter'>
                 <input
                   className = "input"
-                  mask="99/99/9999"
                   value={props.value}
                   onChange={(e)=>props.change(e)}
                   onKeyPress = {e => props.keypress(e)}
