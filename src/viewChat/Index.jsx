@@ -4,6 +4,15 @@ import './style.css';
 import Input from '../components/input';
 import Ballon from '../components/balloon';
 import * as yup from 'yup';
+import axios from 'axios'
+
+
+
+
+const api = axios.create({
+    baseURL: 'https://6181ead284c2020017d89bc0.mockapi.io/Chatcleverton/datamessage/'
+    
+}); 
 
 const addressSchema = yup.object().shape({
  
@@ -56,11 +65,11 @@ const[send,setSend] = React.useState(false)
 const[name,setName] = React.useState('')
 const[valuesErrorState,setValuesErrorState] = React.useState({}) 
 const[values,setValues] = React.useState({
-  name:'',
-  city:'',
-  dtnasc:'',
-  email:'',
-  score:''
+    name: '',
+    city: '',
+    dtnasc: '',
+    email: '',
+    score: 1
   }) 
 const[machinemessages,setMachinemessages] = React.useState([
   {
@@ -122,9 +131,24 @@ const validateColors = erros =>{
   valuesError.score = Boolean(erros.score)
  
 }
+const checkData=(data)=> {
+  return data instanceof Date && !isNaN(data);
+}
 
-
-
+async function sendData(values){
+try{
+  const response = await api.post('/',values)      
+  console.log(response.status)  
+    if(response.status === 201){
+      alert('Dados Enviados')
+    }else{
+      alert('Falha no envio')
+    }
+  } catch(err){
+    alert('Houve uma falha no envio tente novamente')
+    return null
+  }
+}
 async function nextSteps(){ 
   
 
@@ -168,31 +192,30 @@ const maskDate = (value) => {
       validationSchema={addressSchema}
       validate={values => {
         let date
+        let objdate
         const errors = {};
-        if(values.name!==''){
-          valuesSend.name = values.name 
-        }
-        if(values.city!==''){
-          valuesSend.city = values.city 
-        }
-        if(values.dtnasc.length === 10){
-           valuesSend.dtnasc = values.dtnasc.split('/').reverse().join('-') + "T00:00:00.00Z"
-           //values.dtnasc = new Date(values.dtnasc)
-           date =  values.dtnasc.split('/').reverse().join('-')
-           let objdate = new Date(date)
-           if(String(objdate)==='Invalid Date'){
-            alert(date)
-           }
-        }
-        if(values.email!==''){
-          valuesSend.email = values.email 
-        }
-        if(values.email!==''){
-          valuesSend.email = values.email 
-        }
-        if(values.score!==''){
-          valuesSend.score = values.score 
-        }
+        if(!valuesError.name &&
+          !valuesError.city &&
+          !valuesError.dtnasc &&
+          !valuesError.email &&
+          !valuesError.score){
+                valuesSend.name = values.name
+                valuesSend.city = values.city
+                if(values.dtnasc.length === 10){
+                valuesSend.dtnasc = values.dtnasc.split('/').reverse().join('-') + "T00:00:00.00Z"
+                date =  values.dtnasc.split('/').reverse().join('-') + "T03:00:00.00Z"
+                let objdate = new Date(date)
+                if(String(objdate)==='Invalid Date'){
+                  alert(`${objdate}'data invalida'`)
+                }
+                if(checkData(objdate)) //segredo ta aqui lembre se
+                alert(`${objdate}'data invalida'`)
+              }              
+                valuesSend.email = values.email 
+                valuesSend.email = values.email 
+                valuesSend.score = values.score 
+                console.log(Boolean(objdate))
+            }      
         
         // console.log(date)
         // console.log(valuesSend)
@@ -202,8 +225,8 @@ const maskDate = (value) => {
       onSubmit={(values, { setSubmitting }) => {
         // if(step===3){}
         alert(JSON.stringify(values, null, 2));
-        
-        setSubmitting(false);
+        sendData(JSON.stringify(values, null, 2))
+      
       }}
     >
       {({       
@@ -218,9 +241,6 @@ const maskDate = (value) => {
       }) => (
         <form onSubmit={handleSubmit}
         >
-          {/* {`${errors.name} ${values.city = Boolean(errors.city)}
-          ${errors.dtnasc} ${values.dtnasc}`  
-        } */}
         {
           validateColors(errors)
           
