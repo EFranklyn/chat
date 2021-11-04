@@ -55,7 +55,8 @@ export default function Ballon(props){
                   />
                 <button type="button"
                     className="button"
-                    onClick={() => props.click()}
+                    value={props.value}
+                    onClick={(e) => props.click(e)}
                     // type="submit"
                     >              
                 avaçar

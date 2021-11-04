@@ -4,7 +4,6 @@ import './style.css';
 import Input from '../components/input';
 import Ballon from '../components/balloon';
 import * as yup from 'yup';
-import react from 'react';
 
 const addressSchema = yup.object().shape({
  
@@ -28,7 +27,13 @@ const addressSchema = yup.object().shape({
       .positive()
       .integer(),
 });
-
+const values ={
+  name:'',
+  city:'',
+  dtnasc:'',
+  email:'',
+  score:''
+  }
 const valuesSend ={
 name:'',
 city:'',
@@ -39,86 +44,24 @@ score:''
 const valuesError ={
   name:false,
   city:false,
-  dtnasc:'',
-  email:'',
-  score:''
+  dtnasc:false,
+  email:false,
+  score:false
   }
 
-const configInput =[{
-  placeholder:'Nome',
-  name:'name',
-  type:'name',
-  value:''
-},
-{
-  placeholder:'Cidade',
-  name:'city',
-  type:'',
-  value:''
-},
-{
-  placeholder:'Data de Nascimento',
-  name:'dtnasc',
-  type:'date',
-  value:''
-},
-{
-  placeholder:'Email',
-  name:'email',
-  type:'email',
-  value:''
-},
-{
-  placeholder:'Score',
-  name:'score',
-  type:'',
-  value:''
 
-}]
-const machinemessages=[
-  {
-    message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
-    user:'machine',
-    display:"start"
-  },
-  {
-    message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
-    user:'machine',
-    display:"none"
-  },
-  {
-    message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
-    user:'machine',
-    display:"none"
-  },
-  {
-    message:`agora me fala teu email, por favor`,
-    user:'machine',
-    display:"none"
-  },
-  {
-    message:`você finalizou o teste faça uma avaliação`,
-    user:'machine',
-    display:"none"
-  },
-  
-
-]
-
-
-
-
-// const messages = [{message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
-//                   user:'machine'
-//                   },
-// ]
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[send,setSend] = React.useState(false)
 const[name,setName] = React.useState('')
-// console.log(new Date('1995-04-30'))
-// new SimpleDateFormat("dd/MM/yyyy"); 
 const[valuesErrorState,setValuesErrorState] = React.useState({}) 
+const[values,setValues] = React.useState({
+  name:'',
+  city:'',
+  dtnasc:'',
+  email:'',
+  score:''
+  }) 
 const[machinemessages,setMachinemessages] = React.useState([
   {
     message:`Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome`,  
@@ -153,37 +96,20 @@ const[machinemessages,setMachinemessages] = React.useState([
   
 
 ])
-
 React.useEffect(() => {
   setValuesErrorState(valuesError)
 });
 
-
-const keypressName = async e =>{
-  // e.preventDefault ()
-  setName(e.target.value)
-}
-
-const keypress  = async e =>{
-  // console.log(e)
-  // if(e.target.value !== '' && e.code === 'Enter'){
-  //   nextSteps()
-  //   }
-  // alert('teste')
-  
-}
-
-const click = async e  =>{
-  
+const keypress =  e =>{
+  if(e.target.value && (e.code === 'Enter' || e.code == 'NumpadEnter')){
     nextSteps()
-    // console.log(machinemessages)
-    // setMachinemessages(machinemessages[0].message='teste')
+  }
+}
 
-  //   name:false,
-  // city:false,
-  // dtnasc:false,
-  // email:false,
-  // score:false
+const click =  e  =>{   
+    if(e.target.value){
+      nextSteps()
+    }
   console.log(valuesErrorState)
     
    
@@ -238,13 +164,7 @@ const maskDate = (value) => {
   
  <h1>{step}</h1>
     <Formik 
-      initialValues={{
-        name:'',
-        city:'',
-        dtnasc:'',
-        email:'',
-        score:''
-        }}  
+      initialValues={values}  
       validationSchema={addressSchema}
       validate={values => {
         let date
@@ -303,8 +223,9 @@ const maskDate = (value) => {
         } */}
         {
           validateColors(errors)
-
+          
         }
+        {setName(values.name)}
             <Ballon
                 message={machinemessages[0].message}
                 user={machinemessages[0].user}
@@ -317,7 +238,7 @@ const maskDate = (value) => {
               change={handleChange}
               blur={handleBlur}
               name={"name"}
-              keypress={keypressName}
+              keypress={keypress}
               placeholder="Nome"
               type={"Text"}
               click={click}
