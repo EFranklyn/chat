@@ -4,6 +4,7 @@ import './style.css';
 import Input from '../components/input';
 import Ballon from '../components/balloon';
 import * as yup from 'yup';
+import react from 'react';
 
 const addressSchema = yup.object().shape({
  
@@ -36,6 +37,14 @@ dtnasc:'',
 email:'',
 score:''
 }
+const valuesError ={
+  name:false,
+  city:false,
+  dtnasc:'',
+  email:'',
+  score:''
+  }
+
 const configInput =[{
   placeholder:'Nome',
   name:'name',
@@ -107,12 +116,13 @@ const machinemessages=[
 export default function Basic(){
 const[step,setStep] = React.useState(0)  
 const[send,setSend] = React.useState(false)
-console.log(new Date('1995-04-30'))
+const[name,setName] = React.useState('')
+// console.log(new Date('1995-04-30'))
 // new SimpleDateFormat("dd/MM/yyyy"); 
- 
+const[valuesErrorState,setValuesErrorState] = React.useState({}) 
 const[machinemessages,setMachinemessages] = React.useState([
   {
-    message:"Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome",
+    message:`Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome`,  
     user:'machine',
     display:"start",
     id:"1"
@@ -145,17 +155,47 @@ const[machinemessages,setMachinemessages] = React.useState([
 
 ])
 
+React.useEffect(() => {
+  setValuesErrorState(valuesError)
+});
+
+
+const keypressName = async e =>{
+  // e.preventDefault ()
+  setName(e.target.value)
+}
+
 const keypress  = async e =>{
-  console.log(e)
-  if(e.target.value !== '' && e.code === 'Enter'){
-    nextSteps()
-    }
+  // console.log(e)
+  // if(e.target.value !== '' && e.code === 'Enter'){
+  //   nextSteps()
+  //   }
+  // alert('teste')
   
 }
-const click = async e  =>{    
+
+const click = async e  =>{
   
     nextSteps()
+    // console.log(machinemessages)
+    // setMachinemessages(machinemessages[0].message='teste')
+
+  //   name:false,
+  // city:false,
+  // dtnasc:false,
+  // email:false,
+  // score:false
+  console.log(valuesErrorState)
+    
    
+}
+const validateColors = erros =>{
+  valuesError.name = Boolean(erros.name)
+  valuesError.city = Boolean(erros.city)  
+  valuesError.dtnasc = Boolean(erros.dtnasc) 
+  valuesError.email = Boolean(erros.email) 
+  valuesError.score = Boolean(erros.score)
+ 
 }
 
 
@@ -183,7 +223,7 @@ if(step<5){
 }
 const maskDate = (value) => {
     // alert(value)
-    console.log(value.length)
+    // console.log(value.length)
     
   return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{4})(\d)/, "$1");
 }
@@ -235,9 +275,9 @@ const maskDate = (value) => {
           valuesSend.score = values.score 
         }
         
-        console.log(date)
-        console.log(valuesSend)
-        console.log(errors)
+        // console.log(date)
+        // console.log(valuesSend)
+        // console.log(errors)
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
@@ -259,8 +299,12 @@ const maskDate = (value) => {
       }) => (
         <form onSubmit={handleSubmit}
         >
-          {`${errors.name} ${values.city = Boolean(errors.city)}
+          {/* {`${errors.name} ${values.city = Boolean(errors.city)}
           ${errors.dtnasc} ${values.dtnasc}`  
+        } */}
+        {
+          validateColors(errors)
+
         }
             <Ballon
                 message={machinemessages[0].message}
@@ -274,7 +318,7 @@ const maskDate = (value) => {
               change={handleChange}
               blur={handleBlur}
               name={"name"}
-              keypress={keypress}
+              keypress={keypressName}
               placeholder="Nome"
               type={"Text"}
               click={click}
@@ -290,7 +334,9 @@ const maskDate = (value) => {
           <Ballon
           message={machinemessages[1].message}
           user={machinemessages[1].user}
-          display={machinemessages[1].display}
+          namePeople={name}
+          name={"name"}
+
       />
       <Ballon user="user"
               id={1}

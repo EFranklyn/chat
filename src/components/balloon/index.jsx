@@ -6,13 +6,25 @@ export default function Ballon(props){
    
    const classeUserp ='message'+ ' '  + props.user+ 'message'  
    const classeUserBaloon ='baloon'+' '  + props.user + 'baloon'
- 
+   const[name,setName] = React.useState(props.name)
+   const[message,setMessage] = React.useState('')
+   
+   React.useEffect(() => {
+    // Atualiza o titulo do documento usando a API do browser
+    if(props.name ==='name' && props.user==='machine'){
+      setMessage(`Que satirfação ${props.namePeople}. Agora que sei o seu nome qual a cidade e estado que você mora ?`)
+    }else{
+      setMessage(props.message)
+    }
+  });
+
+
    return(
     <div className={`${props.user}boxdiv `}> 
     <div className={classeUserBaloon}>
    
        <p className={classeUserp}> 
-            {props.message}
+            {message}
             {props.children}
        </p>
        {props.user === 'user'?
@@ -25,8 +37,7 @@ export default function Ballon(props){
                   mask="99/99/9999"
                   value={props.value}
                   onChange={(e)=>props.change(e)}
-                  // onKeyPress = {e => { e.which === 13 && props.keypress(e) && e.preventDefault ()
-                  // }}
+                  onKeyPress = {e => props.keypress(e)}
                   name={props.name}
                   placeholder={props.placeholder}
                   type={props.type}
