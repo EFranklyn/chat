@@ -4,29 +4,26 @@ import './style.css';
 import react from 'react';
 export default function Ballon(props){
    
-   const classeUserp ='message'+ ' '  + props.user+ 'message'  
-   const classeUserBaloon ='baloon'+' ' + ' ' + props.user + 'baloon' + ' '
-   const[name,setName] = React.useState(props.name)
-   const[message,setMessage] = React.useState('')
-   const[classColorBaloon,setClassColorBaloon] = React.useState('')
+   const classeUserp ='message'+ ' '  + props.user+ 'message'  //state used to set the user or machine balloon style
+   const classeUserBaloon ='baloon'+' ' + ' ' + props.user + 'baloon' + ' ' //state used to set the user or machine balloon style
+   const[message,setMessage] = React.useState('')  //state that receives the message passed by props
+   const[classColorBaloon,setClassColorBaloon] = React.useState('') //set balloon color in case of error
    
    React.useEffect(() => {
     // Atualiza o titulo do documento usando a API do browser
-    if(props.name ==='name' && props.user==='machine'){
+    if(props.name ==='name' && props.user==='machine'){ //change the value of the message name
       setMessage(`Que satirfação ${props.namePeople}. Agora que sei o seu nome qual a cidade e estado que você mora ?`)
       
-    }else{
+    }else{ //change the value of the message name
       setMessage(props.message)
       
-    }
-    if(props.erro){
+    } 
+    if(props.erro){ //set color in case of error
       setClassColorBaloon('#F23C5B')
     }else{
       setClassColorBaloon('')
     }
-  });
-  
-  
+  }); 
 
    return(
     <div className={`${props.user}boxdiv `}> 
@@ -62,7 +59,7 @@ export default function Ballon(props){
                     onClick={(e) => props.click(e)}
                     // type="submit"
                     >              
-                avaçar
+                Avançar
                 </button>     
               </div>  
               </div>

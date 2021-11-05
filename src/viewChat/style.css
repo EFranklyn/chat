@@ -1,15 +1,11 @@
 .viewmessage {
     
     background-color: #2C4371;
-    /* opacity:20%; */
     margin-left: 2%;
     margin-right: 2%;
-    /* height: 450px; */
     margin-top: 2%;
     margin-bottom: 2%;
-    /* height:max-content; */
     height: 92.9vh;
-    
     border-color: #92a8d1;
   }
 
@@ -20,10 +16,8 @@
     height: 40px;
     width: 90%;
     margin-left: 5%;
-    margin-top: 20%;
+    margin-top: 10%;
     margin-bottom: 20%;
 
   }
-  .divsubmit{
-   
-  }
+  
