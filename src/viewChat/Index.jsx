@@ -6,51 +6,40 @@ import Ballon from '../components/balloon';
 import * as yup from 'yup';
 import axios from 'axios'
 
-
-
-
 const api = axios.create({
-    baseURL: 'https://6181ead284c2020017d89bc0.mockapi.io/Chatcleverton/datamessage/'
+    baseURL: 'https://6181ead284c2020017d89bc0.mockapi.io/Chatcleverton/datamessage/'  //chat api url
     
 }); 
-
-const addressSchema = yup.object().shape({
+const addressSchema = yup.object().shape({ //validation schema for values ​​fields
  
   name: yup
       .string()
-      .required("Informe o Nome"),
+      .required(),
   city: yup
       .string()
-      .required('cidade incorreta'),
+      .required(),
   dtnasc: yup
       .string()
-      .required('data incorreta'),
+      .required(),
   email: yup
       .string()
       .email()
-      .required('Informe o email'),    
+      .required(),    
   score: yup
       .number()
-      .required('Informe um valor correto')
+      .required()
       .max(5)
       .positive()
       .integer(),
 });
-const values ={
-  name:'',
-  city:'',
-  dtnasc:'',
-  email:'',
-  score:''
-  }
-const valuesSend ={
+const valuesSend ={ //values ​​for sending the form
 name:'',
 city:'',
 dtnasc:'',
 email:'',
 score:''
 }
-const valuesError ={
+const valuesError ={ //values ​​for form error handling
   name:false,
   city:false,
   dtnasc:false,
@@ -60,81 +49,72 @@ const valuesError ={
 
 
 export default function Basic(){
-const[step,setStep] = React.useState(0)  
-const[send,setSend] = React.useState(false)
-const[name,setName] = React.useState('')
-const[valuesErrorState,setValuesErrorState] = React.useState({}) 
-const[values,setValues] = React.useState({
+const[step,setStep] = React.useState(0)  //state is responsible for saving the step the user is in
+const[send,setSend] = React.useState(false) //variable that controls the shipment
+const[name,setName] = React.useState('') //state which controls the name to automatically render
+const[valuesErrorState,setValuesErrorState] = React.useState({}) //state with error values, to update colors in real time
+const[values,setValues] = React.useState({ //initial values ​​of the form
     name: '',
     city: '',
     dtnasc: '',
     email: '',
     score: ''
   }) 
-const[machinemessages,setMachinemessages] = React.useState([
+const[machinemessages,setMachinemessages] = React.useState([ 
+  // state with machine messages
+  // message: message that appears to the user
+  // user: user who is using the balloon, can be machine or user
   {
     message:`Olá, Meu nome é Chatcleverton,tudo bem? Para começarmos me informe seu nome e sebronome`,  
-    user:'machine',
-    display:"start",
-    id:"1"
+    user:'machine'
   },
   {
     message:`Que satirfação nameuser. Agora que sei o seu nome qual a cidade e estado que você mora ?`,
-    user:'machine',
-    display:"none",
-    id:"2"
+    user:'machine'
   },
   {
     message:`Legal, agora que sabemos sua cidade e estado, quando foi que você nasceu ?`,
-    user:'machine',
-    display:"none",
-    id:"3"
+    user:'machine'
   },
   {
     message:`agora me fala teu email, por favor`,
-    user:'machine',
-    display:"none",
-    id:"4"
+    user:'machine'
   },
   {
     message:`você finalizou o teste faça uma avaliação`,
-    user:'machine',
-    display:"none",
-    id:"5"
+    user:'machine'
   }
   
 
 ])
 React.useEffect(() => {
+  // updates all the time if there are errors in the form
   setValuesErrorState(valuesError)
 });
 
-const keypress =  e =>{
+const keypress =  e =>{ //makes the form advance dynamically via enter
   if(e.target.value && (e.code === 'Enter' || e.code == 'NumpadEnter')){
     nextSteps()
   }
 }
 
-const click =  e  =>{   
+const click =  e  =>{   //makes the form advance dynamically via click
     if(e.target.value){
       nextSteps()
     }
-  console.log(valuesErrorState)
-    
-   
 }
-const validateColors = erros =>{
+const validateColors = erros =>{ //feeds the constant so that it later feeds the error state
   valuesError.name = Boolean(erros.name)
   valuesError.city = Boolean(erros.city)
   valuesError.email = Boolean(erros.email) 
   valuesError.score = Boolean(erros.score)
  
 }
-const checkData=(data)=> {
+const checkData=(data)=> { //function created to return a date instance being true or false
   return data instanceof Date && !isNaN(data);
 }
 
-async function sendData(values){
+async function sendData(values){ //function used to send the data to the api
 try{
   const response = await api.post('/',values)      
   console.log(response.status)  
@@ -148,37 +128,33 @@ try{
     return null
   }
 }
-
-
-
-async function nextSteps(){ 
+async function nextSteps(){ //function used to advance steps
   if(step<4){
     setStep(step + 1)
     window.location.href = `#${machinemessages[step].id}` 
 }
   
 }
-const maskDate = (value) => {    
+const maskDate = (value) => {    //mask for date of birth
   return value.replace(/\D/g, "").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{2})(\d)/, "$1/$2").replace(/(\d{4})(\d)/, "$1");
 
 }
 
-  const dayValidation = (date,dateobj) =>{
-    let dayDate = date.slice(0, 2)
-    let dayDateObj = dateobj.getDate()
-    let now = new Date()
-    if(dayDateObj && dayDateObj <= 9){
-      dayDateObj = '0' + String(dayDateObj)
-    }else{
-      dayDateObj = String(dayDateObj)
-    }
-    if(dayDate===dayDateObj && dateobj<now){
-      return true
-    }else{
-      return false
-    }
-  
+const dayValidation = (date,dateobj) =>{ //function for date validation , does not allow the date to be invalid or greater than the current date
+  let dayDate = date.slice(0, 2)
+  let dayDateObj = dateobj.getDate()
+  let now = new Date()
+  if(dayDateObj && dayDateObj <= 9){
+    dayDateObj = '0' + String(dayDateObj)
+  }else{
+    dayDateObj = String(dayDateObj)
   }
+  if(dayDate===dayDateObj && dateobj<now){
+    return true
+  }else{
+    return false
+  }
+}
 
   return(
   <div className="viewmessage">
@@ -190,33 +166,30 @@ const maskDate = (value) => {
         let objdate
         const errors = {};
         date =  values.dtnasc.split('/').reverse().join('-') + "T03:00:00.00Z"
-                objdate = new Date(date)
-                if(checkData(objdate) && dayValidation(values.dtnasc,objdate)){
-                  valuesError.dtnasc = false
-                }else{
-                  valuesError.dtnasc = true
-                }
-
+        objdate = new Date(date)
+        if(checkData(objdate) && dayValidation(values.dtnasc,objdate)){
+          valuesError.dtnasc = false
+        }else{
+          valuesError.dtnasc = true
+        }
         if(!valuesError.name &&
           !valuesError.city &&
           !valuesError.dtnasc &&
           !valuesError.email &&
           !valuesError.score){
-                valuesSend.name = values.name
-                valuesSend.city = values.city               
-                valuesSend.dtnasc = date
-                valuesSend.email = values.email 
-                valuesSend.email = values.email 
-                valuesSend.score = values.score 
+            valuesSend.name = values.name
+            valuesSend.city = values.city               
+            valuesSend.dtnasc = date
+            valuesSend.email = values.email 
+            valuesSend.email = values.email 
+            valuesSend.score = values.score 
                 
             } 
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // if(step===3){}
         alert(JSON.stringify(valuesSend, null, 2));
         sendData(JSON.stringify(valuesSend, null, 2))
-      
       }}
     >
       {({       
