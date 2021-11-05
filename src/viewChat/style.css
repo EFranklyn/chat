@@ -7,35 +7,23 @@
     /* height: 450px; */
     margin-top: 2%;
     margin-bottom: 2%;
-
+    /* height:max-content; */
+    height: 92.9vh;
+    
+    border-color: #92a8d1;
   }
 
-  .elementsfooter{
-    /* margin-top: 20%; */
-    margin-left: 2%;    
-    /* background: firebrick; */
-    margin-right: 2% ;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+  .buttonsubimit{
+    background-color: #fff;
+    border-color: #fff;
+    border-style: solid;
+    height: 40px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20%;
+    margin-bottom: 20%;
 
-  
-    
-
-}
-.input{
-  /* margin-top: -2%; */
-  width: 70%;
-  height: 35px;
-}
-.button{
-  margin-left: 2%;
-  width: 30%;
-  height: 41px;
-  
-    
-}
-.containerfooter{
-  display: flex;
-  flex-direction: row-reverse;
-}
+  }
+  .divsubmit{
+   
+  }

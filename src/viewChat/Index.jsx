@@ -182,8 +182,6 @@ const maskDate = (value) => {
 
   return(
   <div className="viewmessage">
-  
- <h1>{step}</h1>
     <Formik 
       initialValues={values}  
       validationSchema={addressSchema}
@@ -357,13 +355,13 @@ const maskDate = (value) => {
        
     
 
-          <div className='elementsfooter'>  
-          <button type="submit" disabled={false}>
-            Submit
-          </button>  
-          </div>
-          <div className='elementsfooter'>
-          </div>                    
+          <div className='divsubmit'>  
+            <button
+            className='buttonsubimit'
+            type="submit" disabled={false}>
+              Submit
+            </button>  
+          </div>               
         </form>     
         
       )}
