@@ -28,24 +28,20 @@
 }
 @keyframes animationuser {
     0% {
-        transform: translateX(0px); 
-        opacity: 30%;       
+        transform: translateX(0px);       
     }
     70% {
-        transform: translateX(-35px); 
-        opacity: 70%;         
+        transform: translateX(-35px);       
     }
 }
 
 
 @keyframes animationmachine {
     0% {
-        transform: translateX(0px);
-        opacity: 30%;        
+        transform: translateX(0px);    
     }
     70% {
-        transform: translateX(35px);  
-        opacity: 70%;       
+        transform: translateX(35px); 
     }
    
     
