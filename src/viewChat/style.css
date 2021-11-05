@@ -1,35 +1,23 @@
-.Box {
-    text-align: center;
-    background-color: aquamarine;
+.viewmessage {
+    
+    background-color: #2C4371;
     margin-left: 2%;
     margin-right: 2%;
-    /* height: 600px; */
     margin-top: 2%;
-    /* display: block; */
-    overflow: scroll auto;
-    overflow-y: scroll auto;
-    /* display: flex;
-    flex-direction: column; */
-
+    margin-bottom: 2%;
+    height: 92.9vh;
+    border-color: #92a8d1;
   }
 
-  .elementsfooter{
-    margin-top: 20%;
-    margin-left: 4%;
-    margin-bottom: 5%;
-    display: flex;
-    flex-direction: row;
-    /* background: firebrick; */
-    margin-right: 2% ;
-    
+  .buttonsubimit{
+    background-color: #fff;
+    border-color: #fff;
+    border-style: solid;
+    height: 40px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10%;
+    margin-bottom: 20%;
 
-}
-.input{
-  width: 350px;
-  height: 35px;
-}
-.button{  
-    margin-left: 2%;
-    width: 100px;
-    
-}
+  }
+  
