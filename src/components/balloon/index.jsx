@@ -1,11 +1,9 @@
 import React from 'react';
-import { Formik } from 'formik';
 import './style.css';
-import react from 'react';
 export default function Ballon(props){
    
    const classeUserp ='message'+ ' '  + props.user+ 'message'  //state used to set the user or machine balloon style
-   const classeUserBaloon ='baloon'+' ' + ' ' + props.user + 'baloon' + ' ' //state used to set the user or machine balloon style
+   const classeUserBaloon ='baloon'+' ' + ' ' + props.user + 'baloon'  //state used to set the user or machine balloon style
    const[message,setMessage] = React.useState('')  //state that receives the message passed by props
    const[classColorBaloon,setClassColorBaloon] = React.useState('') //set balloon color in case of error
    
@@ -26,7 +24,7 @@ export default function Ballon(props){
   }); 
 
    return(
-    <div className={`${props.user}boxdiv `}> 
+    <div className={`${props.user}boxdiv`}> 
     <div 
     className={`${classeUserBaloon} ${classColorBaloon}`}
     style={{backgroundColor: classColorBaloon}}>
