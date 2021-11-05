@@ -1,23 +1,18 @@
 .viewmessage {
     
-    background-color: aquamarine;
+    background-color: #2C4371;
+    /* opacity:20%; */
     margin-left: 2%;
     margin-right: 2%;
     /* height: 450px; */
     margin-top: 2%;
-    margin-bottom: 5%;
-    /* display: block; */
-    /* overflow: scroll x; */
-    /* overflow-y: scroll auto;
-    overflow-x: none; */
-    /* display: flex;
-    flex-direction: column; */
+    margin-bottom: 2%;
 
   }
 
   .elementsfooter{
     /* margin-top: 20%; */
-    margin-left: 4%;    
+    margin-left: 2%;    
     /* background: firebrick; */
     margin-right: 2% ;
     display: flex;

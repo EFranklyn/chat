@@ -44,9 +44,11 @@
 }
 
 .userbaloon{
-    background: firebrick;
+    /* background-image: radial-gradient(circle at 116.45% 74.18%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%); */
+    background-color: #3c78f2;
     margin-right: 2% ;
     animation: animationuser 2s;
+    box-shadow: -5px 5px 1.5em black;
 
 }
 @keyframes animationmachine {
@@ -60,10 +62,15 @@
     
 }
 .machinebaloon{
+    /* background-image: radial-gradient(circle at -19.64% 37.72%, #a3a7ff 0, #7a8ffc 25%, #3c78f2 50%, #0063e8 75%, #0051de 100%);  */
+    background-color: #3c78f2;
+    /* background-color: */
+    opacity: 100%;
+    box-shadow: 5px 5px 1.5em black;
     margin: right; 
     margin-left: 2%;
     right: 2px;
-    background: forestgreen;   
+    /* background: forestgreen;    */
     animation: animationmachine 2s;
     
 
@@ -71,8 +78,10 @@
 
 .message{
     width: 100%;
-    
-    
+    /* color: black; */
+    border-color: black;
+    text-shadow: 1px 1px 2px #000000;
+    font-size: large;
 }
 .usermessage{
     align-items: flex-end;
@@ -84,7 +93,7 @@
 
 .elementsfooter{
     /* margin-top: 20%; */
-    margin-left: 4%;    
+    margin-left: 2%;    
     /* background: firebrick; */
     margin-right: 2% ;
     display: flex;
@@ -99,11 +108,21 @@
   /* margin-top: -2%; */
   width: 70%;
   height: 35px;
+  border-radius: 10px;
+  border-color: #fff;
+  border-top-color: #fff;
+  border-right-color: #fff;
+  border-left-color: #fff;
+  border-style: solid;
 }
 .button{
   margin-left: 2%;
   width: 30%;
   height: 41px;
+  border-radius: 8px;
+  background-color: #fff;
+  border-color: #fff;
+  border-style: solid;
   
     
 }

@@ -125,8 +125,7 @@ const click =  e  =>{
 }
 const validateColors = erros =>{
   valuesError.name = Boolean(erros.name)
-  valuesError.city = Boolean(erros.city)  
-  //valuesError.dtnasc = Boolean(erros.dtnasc) 
+  valuesError.city = Boolean(erros.city)
   valuesError.email = Boolean(erros.email) 
   valuesError.score = Boolean(erros.score)
  
@@ -149,25 +148,14 @@ try{
     return null
   }
 }
-async function nextSteps(){ 
-  
 
-if(step<5){
+
+
+async function nextSteps(){ 
+  if(step<4){
     setStep(step + 1)
     window.location.href = `#${machinemessages[step].id}` 
 }
-// setTimeout(2)
-
-// document.getElementById(step).scrollIntoView();
-
-  
-  // values.name = value
-  // messages.push({message:value,user:'user'}) 
-  // messages.push({message:machinemessages[step].replace('nameuser',value),user:'machine'}) 
-  // setValue('')
-  // window.scrollTo({top:0,behavior:'smooth'})
-  // window.scrollTo(5000000,5000000)
-  // await window.scroll(0, 0);
   
 }
 const maskDate = (value) => {    
@@ -306,7 +294,7 @@ const maskDate = (value) => {
     display={machinemessages[2].display}
 />
       <Ballon user="user"
-              id={1}
+              id={2}
               value={maskDate(values.dtnasc)}
               keypress={keypress}
               change={handleChange}
@@ -330,7 +318,7 @@ const maskDate = (value) => {
     display={machinemessages[3].display}
 />
       <Ballon user="user"
-              id={1}
+              id={3}
               value={values.email}
               keypress={keypress}
               change={handleChange}
@@ -353,7 +341,7 @@ const maskDate = (value) => {
     display={machinemessages[3].display}
 />
 <Ballon user="user"
-              id={1}
+              id={4}
               value={values.score}
               keypress={keypress}
               change={handleChange}

@@ -20,18 +20,19 @@ export default function Ballon(props){
       
     }
     if(props.erro){
-      setClassColorBaloon('pink')
+      setClassColorBaloon('#F23C5B')
     }else{
       setClassColorBaloon('')
     }
   });
-
+  
+  
 
    return(
     <div className={`${props.user}boxdiv `}> 
-    <div style={{backgroundColor:classColorBaloon}} 
-    className={`${classeUserBaloon} ${classColorBaloon}`}>
-   
+    <div 
+    className={`${classeUserBaloon} ${classColorBaloon}`}
+    style={{backgroundColor: classColorBaloon}}>
        <p className={classeUserp}> 
             {message}
             {props.children}
@@ -42,6 +43,8 @@ export default function Ballon(props){
          <div className="containerfooter">
           <div className='elementsfooter'>
                 <input
+                
+                  id={props.id}
                   className = "input"
                   value={props.value}
                   onChange={(e)=>props.change(e)}
@@ -49,7 +52,8 @@ export default function Ballon(props){
                   name={props.name}
                   placeholder={props.placeholder}
                   type={props.type}
-                  // defaultvalue={value}
+                  
+                  
                   
                   />
                 <button type="button"
