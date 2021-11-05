@@ -35,13 +35,7 @@
     }
 }
 
-.userbaloon{
-     background-color: #3c78f2;
-    margin-right: 2% ;
-    animation: animationuser 2s;
-    box-shadow: -5px 5px 1.5em black;
 
-}
 @keyframes animationmachine {
     0% {
         transform: translateX(0px);        
@@ -53,13 +47,19 @@
     
 }
 .machinebaloon{
-   background-color: #3c78f2;
-    opacity: 100%;
+    background-color: #3c78f2;
     box-shadow: 5px 5px 1.5em black;
     margin: right; 
     margin-left: 2%;
-    right: 2px;
+
     animation: animationmachine 2s;
+}
+.userbaloon{
+   background-color: #3c78f2;
+   box-shadow: -5px 5px 1.5em black;
+   margin-right: 2% ;
+   animation: animationuser 2s;
+   
 }
 
 .message{
